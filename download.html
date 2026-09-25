@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <title>Veyoz — Download</title>
+    <meta name="description" content="Download Veyoz." />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div class="discontinued-bar" role="status">
+        <div class="container mx-auto px-4 py-3 text-center text-sm">
+            <span class="font-semibold">Veyoz is no longer under active development.</span>
+            <span class="opacity-90">The documentation, benchmarks, and binary are left public for reference.</span>
+        </div>
+    </div>
+    <header class="bg-white">
+        <nav class="container mx-auto px-4 py-4 flex flex-wrap items-center justify-center md:justify-between">
+            <div class="logo text-2xl font-semibold w-full md:w-auto text-center md:text-left">
+                <img src="img/icon.png" class="inline-block" style="width:60px; margin:0 auto 10px;" alt="Veyoz" />
+            </div>
+            <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-2 md:mt-0">
+                <a href="index.html" class="menu-link">Veyoz</a>
+                <a href="architecture.html" class="menu-link">Architecture</a>
+                <a href="download.html" class="menu-link menu-active">Download</a>
+                <a href="benchmarks.html" class="menu-link">Benchmarks</a>
+                <a href="docs.html" class="menu-link">Docs</a>
+                <a href="contact.html" class="menu-link">Contact Us</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <div class="hero-elegant">
+        <h1 class="mt-10">Download Veyoz</h1>
+        <div class="divider"></div>
+        <p class="sub-slogan">Single binary. No dependencies. Evaluation mode included.</p>
+    </div>
+
+    <!-- ===== BINARY ===== -->
+    <section class="section-light">
+        <div class="container mx-auto px-6 py-20">
+            <div class="max-w-4xl mx-auto">
+
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-0.5 bg-blue-600"></div>
+                    <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Download</span>
+                    <div class="w-8 h-0.5 bg-blue-600"></div>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Veyoz engine
+                </h2>
+                <p class="text-gray-600 mb-8">
+                    One executable. Runs on Linux x86_64 and aarch64. No runtime, no JVM, no sidecar.
+                </p>
+
+                <div class="space-y-4">
+
+                    <!-- Linux x86_64 -->
+                    <div class="bg-white rounded-xl border border-gray-200 p-6">
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+                            <div>
+                                <h3 class="font-bold text-gray-800 text-base">Linux · x86_64</h3>
+                                <p class="text-sm text-gray-500 mt-1">Recommended for production on standard cloud and
+                                    bare-metal hosts.</p>
+                            </div>
+                            <div class="flex flex-wrap gap-3 text-sm">
+                                <a href="veyoz" class="text-blue-600 hover:underline font-semibold">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-xs text-gray-500">
+                    BUSL-1.1 · Evaluation mode included · Commercial license required for production
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LICENSING ===== -->
+    <section class="section-light-alt">
+        <div class="container mx-auto px-6 py-20">
+            <div class="max-w-4xl mx-auto">
+
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-0.5 bg-blue-600"></div>
+                    <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Licensing</span>
+                    <div class="w-8 h-0.5 bg-blue-600"></div>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+                    Try everything. License for production.
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-4">
+
+                    <!-- Evaluation -->
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
+                        <h3 class="font-bold text-green-800 text-base mb-1">Evaluation mode</h3>
+                        <p class="text-green-700 text-sm mb-3">No license file required.</p>
+                        <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                            <li>Full feature set</li>
+                            <li>No time limit</li>
+                            <li>For testing and development</li>
+                        </ul>
+                    </div>
+
+                    <!-- Commercial -->
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+                        <h3 class="font-bold text-blue-800 text-base mb-1">Commercial license</h3>
+                        <p class="text-blue-700 text-sm mb-3">Required for production use.</p>
+                        <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
+                            <li>Full feature set</li>
+                            <li>Software updates</li>
+                            <li>Technical support</li>
+                            <li>Per-instance or per-cluster pricing</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="mt-6 bg-white rounded-xl border border-gray-200 p-6">
+                    <p class="text-sm text-gray-700">
+                        <span class="font-semibold">How it works:</span> Place your
+                        <code class="bg-gray-100 px-1.5 py-0.5 rounded text-xs">.lic</code>
+                        file next to the Veyoz binary, or set
+                        <code
+                            class="bg-gray-100 px-1.5 py-0.5 rounded text-xs">VEYOZ_LICENSE=/path/to/license.lic</code>.
+                    </p>
+                    <p class="text-sm text-gray-600 mt-3">
+                        <a href="contact.html" class="text-blue-600 hover:underline">Contact us</a>
+                        to purchase a commercial license.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== REQUIREMENTS ===== -->
+    <section class="section-light">
+        <div class="container mx-auto px-6 py-20">
+            <div class="max-w-4xl mx-auto">
+
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-8 h-0.5 bg-blue-600"></div>
+                    <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Requirements</span>
+                    <div class="w-8 h-0.5 bg-blue-600"></div>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+                    What you need.
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-4">
+
+                    <div class="bg-white rounded-xl border border-gray-200 p-6">
+                        <h4 class="font-bold text-gray-800 text-base mb-1">Linux</h4>
+                        <p class="text-sm text-gray-500">x86_64 or aarch64. Kernel 5.10 or newer.</p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 p-6">
+                        <h4 class="font-bold text-gray-800 text-base mb-1">Memory</h4>
+                        <p class="text-sm text-gray-500">Proportional to the hot window. Typically a few GB per shard.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl border border-gray-200 p-6">
+                        <h4 class="font-bold text-gray-800 text-base mb-1">Network</h4>
+                        <p class="text-sm text-gray-500">UDP for node-to-node QUIC. TCP for the REST API.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white text-center py-4 mt-0">
+        <p>&copy; 2026 Veyoz. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

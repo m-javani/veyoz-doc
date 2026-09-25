@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <title>Veyoz — About this project</title>
+    <meta name="description" content="Why Veyoz is no longer under active development." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div class="discontinued-bar" role="status">
+        <div class="container mx-auto px-4 py-3 text-center text-sm">
+            <span class="font-semibold">Veyoz is no longer under active development.</span>
+            <span class="opacity-90">The documentation, benchmarks, and binary are left public for reference.</span>
+        </div>
+    </div>
+
+    <header class="bg-white">
+        <nav class="container mx-auto px-4 py-4 flex flex-wrap items-center justify-center md:justify-between">
+            <div class="logo text-2xl font-semibold w-full md:w-auto text-center md:text-left">
+                <img src="img/icon.png" class="inline-block" style="width:100px; margin:0 auto 10px;" alt="Veyoz" />
+            </div>
+            <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-2 md:mt-0">
+                <a href="index.html" class="menu-link">Veyoz</a>
+                <a href="architecture.html" class="menu-link">Architecture</a>
+                <a href="download.html" class="menu-link">Download</a>
+                <a href="benchmarks.html" class="menu-link">Benchmarks</a>
+                <a href="docs.html" class="menu-link">Docs</a>
+                <a href="contact.html" class="menu-link">Contact Us</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero-elegant">
+        <h1>About this project</h1>
+        <div class="divider"></div>
+        <p class="sub-slogan">Why Veyoz ended, and what it left behind.</p>
+    </div>
+
+    <section class="section-light">
+        <div class="container mx-auto px-6 py-20">
+            <div class="max-w-3xl mx-auto space-y-6 text-gray-700">
+
+                <p>
+                    Veyoz is a search-and-pricing engine for OTA inventory, built in Rust between
+                    late 2024 and mid-2025. It reached a working state: reproducible benchmarks,
+                    a passing end-to-end test suite, a documented wire format, and complete public
+                    documentation.
+                </p>
+
+                <p>
+                    Development was discontinued mid-2025. The reason was not technical. The
+                    companies Veyoz was built for — travel platforms — became unable to operate
+                    in or with Iran due to the political situation that escalated that year.
+                    Without a reachable market, further development had no path forward.
+                </p>
+
+                <p>
+                    The documentation, benchmarks, and binary are left public for reference. The
+                    source is not open. Anyone interested in the underlying design is welcome to
+                    reach out.
+                </p>
+
+                <p class="text-sm text-gray-500 pt-4 border-t border-gray-200">
+                    — Mehdi Javani, September 2025
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white text-center py-4 mt-0">
+        <p>&copy; 2026 Veyoz. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
