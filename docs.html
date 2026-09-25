@@ -1,0 +1,2977 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <title>Veyoz — Benchmarks</title>
+    <meta name="description" content="Veyoz performance benchmarks." />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div class="discontinued-bar" role="status">
+        <div class="container mx-auto px-4 py-3 text-center text-sm">
+            <span class="font-semibold">Veyoz is no longer under active development.</span>
+            <span class="opacity-90">The documentation, benchmarks, and binary are left public for reference.</span>
+        </div>
+    </div>
+    <!-- Mobile Sidebar Menu Button Codes -->
+    <button class="sidebar-menu-button">
+        <span>☰</span>
+    </button>
+
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <ul class="nav-list primary-nav">
+
+                <!-- 1. Overview -->
+                <li class="nav-item">
+                    <a href="#overview" class="nav-link top-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                            <polyline points="14,2 14,8 20,8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                            <line x1="10" y1="9" x2="8" y2="9" />
+                        </svg>
+                        <span class="nav-label">Overview</span>
+                    </a>
+                </li>
+                <!-- 2. Deployment -->
+                <li class="nav-item">
+                    <a href="#deployment" class="nav-link top-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                        </svg>
+                        <span class="nav-label">Deployment</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#models" class="nav-link top-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <line x1="3" y1="9" x2="21" y2="9" />
+                            <line x1="3" y1="15" x2="21" y2="15" />
+                            <line x1="9" y1="3" x2="9" y2="21" />
+                            <line x1="15" y1="3" x2="15" y2="21" />
+                        </svg>
+                        models
+                    </a>
+                </li>
+                <!-- API -->
+                <li class="nav-item">
+                    <a href="#api" class="nav-link top-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 16l4-4-4-4M8 8l-4 4 4 4M12 4v16" />
+                        </svg>
+                        <span class="nav-label">API</span>
+                    </a>
+                </li>
+                <!-- Seed DataSet -->
+                <li class="nav-item">
+                    <a href="#bulk-import" class="nav-link top-link">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                        <span class="nav-label">Bulk Import</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="main-content">
+        <header class="bg-white">
+            <nav class="container mx-auto px-4 py-4 flex flex-wrap items-center justify-center md:justify-between">
+                <div class="logo text-2xl font-semibold w-full md:w-auto text-center md:text-left">
+                    <img src="img/icon.png" class="inline-block" style="width:60px; margin:0 auto 10px;" alt="Veyoz" />
+                </div>
+                <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-2 md:mt-0">
+                    <a href="index.html" class="menu-link">Veyoz</a>
+                    <a href="architecture.html" class="menu-link">Architecture</a>
+                    <a href="download.html" class="menu-link">Download</a>
+                    <a href="benchmarks.html" class="menu-link">Benchmarks</a>
+                    <a href="docs.html" class="menu-link menu-active">Docs</a>
+                    <a href="contact.html" class="menu-link">Contact Us</a>
+                </div>
+            </nav>
+        </header>
+
+        <section id="overview" class="content-section hidden">
+            <div class="p-6 space-y-8">
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Overview</h2>
+                    <p class="text-gray-600 mt-1">
+                        Read this first. It's the twenty-minute version of every other page.
+                    </p>
+                </div>
+
+                <!-- ── The pain ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">The pain</h3>
+                    <p class="text-sm text-gray-700 mb-3">
+                        Search is not a lookup. For a booking engine, "find me a room" means three questions asked
+                        at once:
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-700 list-disc pl-5">
+                        <li><strong>Which properties match?</strong> Location, dates, rating, facilities, capacity,
+                            policies.</li>
+                        <li><strong>What does each one cost?</strong> Rate, child pricing, charges, taxes, promotions —
+                            computed per query, not stored.</li>
+                        <li><strong>What is the cheapest valid combination?</strong> Especially when the party needs
+                            more than one room, or mixes adults and children.</li>
+                    </ul>
+                    <p class="text-sm text-gray-700 mt-3">
+                        Most teams solve this with two systems bolted together. A search engine (Elasticsearch, Redis)
+                        answers the first question. A rules engine answers the second. Keeping them in sync is
+                        the third, permanent problem.
+                    </p>
+                    <p class="text-sm text-gray-700 mt-3">
+                        The result is fragile. Prices drift. Caches miss. Latency spikes. The team spends its time on
+                        infrastructure, not on the product.
+                    </p>
+                </div>
+
+                <!-- ── The solution ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">The solution</h3>
+                    <p class="text-sm text-gray-700 mb-3">
+                        Veyoz does all three in one engine.
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-700 list-disc pl-5">
+                        <li><strong>Filter.</strong> Bitmap indices reduce tens of thousands of properties to a few
+                            hundred candidates in microseconds.</li>
+                        <li><strong>Price.</strong> Every surviving property is priced for the specific query — rate,
+                            child supplements, charges, promotions, restrictions — with no pre-computed price.</li>
+                        <li><strong>Rank.</strong> For multi-room queries, the cheapest combination that covers the
+                            party is chosen deterministically.</li>
+                    </ul>
+                    <p class="text-sm text-gray-700 mt-3">
+                        The state is held in memory, replicated through Raft, and served by followers. There is no
+                        search index to keep in sync and no cache to invalidate. When a rate changes, the state
+                        changes; the next search sees it.
+                    </p>
+                </div>
+
+                <!-- ── How you integrate ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">How you integrate</h3>
+
+                    <div class="space-y-5">
+                        <div class="flex gap-4">
+                            <div
+                                class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-semibold flex items-center justify-center text-sm">
+                                1</div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">Seed the state.</p>
+                                <p class="text-sm text-gray-700">
+                                    Export your properties, rooms, rates, calendars, charges, and promotions to CSV.
+                                    Run <code
+                                        class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">veyoz snapshot</code>
+                                    to build a snapshot, and boot each node from it. Millions of records load in
+                                    seconds.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div
+                                class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-semibold flex items-center justify-center text-sm">
+                                2</div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">Send deltas.</p>
+                                <p class="text-sm text-gray-700">
+                                    After bootstrap, everything is a REST call: new properties, rate changes,
+                                    availability updates, calendar edits. The leader replicates them; every follower
+                                    applies them in the same order.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div
+                                class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 text-blue-700 font-semibold flex items-center justify-center text-sm">
+                                3</div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-800">Search.</p>
+                                <p class="text-sm text-gray-700">
+                                    One <code
+                                        class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">POST /api/search</code>
+                                    call returns priced, ranked results. Followers serve reads; add a follower to add
+                                    read capacity.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 pt-5 border-t border-gray-200">
+                        <p class="text-sm text-gray-700">
+                            Your database stays the source of truth for cold data and far-future dates. Veyoz holds
+                            only the hot booking window in memory.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ── What Veyoz is not ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">What Veyoz is not</h3>
+                    <ul class="space-y-2 text-sm text-gray-700 list-disc pl-5">
+                        <li>Not a booking system. Reservations, payments, and confirmations stay where they are.</li>
+                        <li>Not a channel manager. You send us normalized data; we don't fetch from aggregators.</li>
+                        <li>Not a ranking engine. We return the cheapest valid result. Ranking is your product decision.
+                        </li>
+                        <li>Not a general-purpose database. It does one thing: search with pricing.</li>
+                    </ul>
+                </div>
+
+                <!-- ── Where to go next ── -->
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <h3 class="text-base font-semibold text-blue-900 mb-3">Where to go next</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="#models" class="text-blue-700 hover:underline font-semibold">Models</a>
+                            <span class="text-blue-800"> — what data Veyoz ingests.</span>
+                        </li>
+                        <li>
+                            <a href="#api" class="text-blue-700 hover:underline font-semibold">API</a>
+                            <span class="text-blue-800"> — every route, in one table.</span>
+                        </li>
+                        <li>
+                            <a href="#bulk-import" class="text-blue-700 hover:underline font-semibold">Bulk Import</a>
+                            <span class="text-blue-800"> — the CSV format for the initial seed.</span>
+                        </li>
+                        <li>
+                            <a href="#deployment" class="text-blue-700 hover:underline font-semibold">Deployment</a>
+                            <span class="text-blue-800"> — how to run a node.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+        <section id="models" class="content-section hidden">
+            <div class="p-6 space-y-8">
+
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Models</h2>
+                    <p class="text-gray-600 mt-1">
+                        These are the wire models exchanged with the API. All fields are JSON.
+                        Money is always an integer in the smallest currency unit (e.g., EUR cents).
+                        Dates are ISO 8601 (<code
+                            class="font-mono text-sm bg-gray-100 px-1 py-0.5 rounded">YYYY-MM-DD</code>).
+                        Country codes are ISO 3166-1 alpha-2, uppercase.
+                    </p>
+                </div>
+
+                <!-- ── Property ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">Property</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        A property and its static metadata. One per physical hotel, apartment, or unit.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>u32</td>
+                                <td>Unique property identifier. Yours.</td>
+                            </tr>
+                            <tr>
+                                <td><code>category</code></td>
+                                <td>u8</td>
+                                <td>Property category code.</td>
+                            </tr>
+                            <tr>
+                                <td><code>rating</code></td>
+                                <td>u8</td>
+                                <td>Star rating 1–5. <code>0</code> means unrated.</td>
+                            </tr>
+                            <tr>
+                                <td><code>review_score</code></td>
+                                <td>u16</td>
+                                <td>Review score.</td>
+                            </tr>
+                            <tr>
+                                <td><code>city</code></td>
+                                <td>i32</td>
+                                <td>Signed city identifier.</td>
+                            </tr>
+                            <tr>
+                                <td><code>district</code></td>
+                                <td>u32</td>
+                                <td>District identifier. <code>0</code> = none.</td>
+                            </tr>
+                            <tr>
+                                <td><code>country</code></td>
+                                <td>string</td>
+                                <td>ISO alpha-2, uppercase (<code>US</code>, <code>TR</code>).</td>
+                            </tr>
+                            <tr>
+                                <td><code>region</code></td>
+                                <td>u32</td>
+                                <td>Region identifier. <code>0</code> = none.</td>
+                            </tr>
+                            <tr>
+                                <td><code>lat</code></td>
+                                <td>f64</td>
+                                <td>Latitude.</td>
+                            </tr>
+                            <tr>
+                                <td><code>lon</code></td>
+                                <td>f64</td>
+                                <td>Longitude.</td>
+                            </tr>
+                            <tr>
+                                <td><code>tax_inclusive</code></td>
+                                <td>bool</td>
+                                <td>Whether the base rate already includes tax. See Charges doc.</td>
+                            </tr>
+                            <tr>
+                                <td><code>filter_codes</code></td>
+                                <td>u32[]</td>
+                                <td>Property-level facility codes. Max 64 distinct codes across the dataset.</td>
+                            </tr>
+                            <tr>
+                                <td><code>child_policy</code></td>
+                                <td>object \| null</td>
+                                <td>See <em>ChildAgePolicy</em> below. <code>null</code> = adult-only.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ── ChildAgePolicy ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">ChildAgePolicy</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Property-level. Declares how the property treats children and how they're bucketed for pricing.
+                        All rates of the property share the same buckets.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>accepted_guest_type</code></td>
+                                <td>enum</td>
+                                <td><code>AdultOnly</code> or <code>ChildrenAllowed</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>min_guest_age</code></td>
+                                <td>u8</td>
+                                <td>Lowest age that counts as a child. Must equal the first bucket's
+                                    <code>min_age</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>age_buckets</code></td>
+                                <td>AgeBucket[]</td>
+                                <td>Up to 4. Sorted ascending, non-overlapping, inclusive bounds.</td>
+                            </tr>
+                            <tr>
+                                <td><code>max_children_per_bucket</code></td>
+                                <td>u8</td>
+                                <td>Highest staggered child index. A 4th child in a bucket reuses the last index's
+                                    price.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-sm text-gray-600 mt-3">
+                        <strong>AgeBucket:</strong> <code>min_age</code> (u8, inclusive) · <code>max_age</code> (u8,
+                        inclusive).
+                    </p>
+                </div>
+
+                <!-- ── RoomType ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">RoomType</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        A bookable room type under a property. Capacity, physical units, and static codes for the
+                        front-end cache.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>u32</td>
+                                <td>Room type identifier. Yours.</td>
+                            </tr>
+                            <tr>
+                                <td><code>property_id</code></td>
+                                <td>u32</td>
+                                <td>Parent property.</td>
+                            </tr>
+                            <tr>
+                                <td><code>room_type_code</code></td>
+                                <td>u32</td>
+                                <td>Code for static cache lookup. Used by <code>room_codes</code> search filter.</td>
+                            </tr>
+                            <tr>
+                                <td><code>max_occupancy</code></td>
+                                <td>u8</td>
+                                <td>Total occupancy.</td>
+                            </tr>
+                            <tr>
+                                <td><code>max_adults</code></td>
+                                <td>u8</td>
+                                <td>Real adults max. Never exceeded by children, even when a child is priced as an
+                                    adult.</td>
+                            </tr>
+                            <tr>
+                                <td><code>max_children</code></td>
+                                <td>u8</td>
+                                <td>Real children max.</td>
+                            </tr>
+                            <tr>
+                                <td><code>total_units</code></td>
+                                <td>u16</td>
+                                <td>Physical units of this type.</td>
+                            </tr>
+                            <tr>
+                                <td><code>features</code></td>
+                                <td>u32[]</td>
+                                <td>Room feature codes. Used by <code>room_facilities</code> filter.</td>
+                            </tr>
+                            <tr>
+                                <td><code>bed_types</code></td>
+                                <td>u32[]</td>
+                                <td>Bed type codes. Used by <code>bed_filter</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ── RoomRate ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">RoomRate</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        A rate plan under a room type. Declares the pricing model and the structural rules that
+                        govern every daily price for this rate.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>property_id</code></td>
+                                <td>u32</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>room_type_id</code></td>
+                                <td>u32</td>
+                                <td>Parent room type.</td>
+                            </tr>
+                            <tr>
+                                <td><code>rate_plan_id</code></td>
+                                <td>u32</td>
+                                <td>Rate plan identifier. Yours.</td>
+                            </tr>
+                            <tr>
+                                <td><code>max_occupancy</code></td>
+                                <td>u8 \| null</td>
+                                <td>Optional override. When set, the effective max is <code>min(rate, room type)</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>pricing_type</code></td>
+                                <td>enum</td>
+                                <td><code>Standard</code>, <code>Rlo</code>, <code>Obp</code>, or <code>Los</code>.
+                                    Fixed for the life of the rate.</td>
+                            </tr>
+                            <tr>
+                                <td><code>meal_code</code></td>
+                                <td>u32 \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>cancellation_policy_id</code></td>
+                                <td>u32</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>value_adds</code></td>
+                                <td>u32[]</td>
+                                <td>Value-add codes. Max 64 distinct across the dataset.</td>
+                            </tr>
+                            <tr>
+                                <td><code>rlo_rules</code></td>
+                                <td>object \| null</td>
+                                <td>Required when <code>pricing_type = Rlo</code>. See <em>RloRules</em>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>child_pricing</code></td>
+                                <td>ChildPrice[]</td>
+                                <td>Default child grid for this rate. Missing cells default to free.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-4 space-y-3">
+                        <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-2">RloRules</p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                The base occupancy and the offsets applied for other adult counts.
+                            </p>
+                            <p class="text-sm text-gray-700">
+                                <code>leading_occupancy</code> (u8) · <code>offsets</code> (OccupancyOffset[])
+                            </p>
+                        </div>
+
+                        <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-2">OccupancyOffset</p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                Adjusts the leading occupancy price for one specific adult count.
+                            </p>
+                            <p class="text-sm text-gray-700">
+                                <code>persons</code> (u8, must differ from <code>leading_occupancy</code>) ·
+                                <code>offset_type</code> (<code>Percentage</code> | <code>Absolute</code>) ·
+                                <code>value</code> (i32 — whole percent for <code>Percentage</code>,
+                                smallest currency unit for <code>Absolute</code>) ·
+                                <code>round_down</code> (bool)
+                            </p>
+                        </div>
+
+                        <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-2">ChildPrice</p>
+                            <p class="text-sm text-gray-600 mb-2">
+                                One cell of the rate's default child pricing grid.
+                            </p>
+                            <p class="text-sm text-gray-700">
+                                <code>bucket</code> (u8, index into property's <code>age_buckets</code>) ·
+                                <code>child_index</code> (u8, 0-based within the bucket) ·
+                                <code>amount</code> (u32, fixed amount in minor units) ·
+                                <code>per_stay</code> (bool — <code>true</code> = once per stay, <code>false</code> =
+                                per night)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Charge ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">Charge</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        A fee added on top of the room price. See <em>Charges &amp; Promotions</em> for the full rules.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>u32</td>
+                                <td>Unique within a property.</td>
+                            </tr>
+                            <tr>
+                                <td><code>property_id</code></td>
+                                <td>u32</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>charge_type</code></td>
+                                <td>enum</td>
+                                <td><code>CityTax</code>, <code>Vat</code>, <code>Tax</code>, <code>CleaningFee</code>,
+                                    <code>ResortFee</code>, <code>ServiceFee</code>, <code>TransferFee</code>,
+                                    <code>DestinationCharge</code>, <code>Other</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>guest_origin</code></td>
+                                <td>enum</td>
+                                <td><code>Any</code>, <code>Domestic</code>, <code>International</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>travel_purpose</code></td>
+                                <td>enum</td>
+                                <td><code>Any</code>, <code>Leisure</code>, <code>Business</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>level</code></td>
+                                <td>enum</td>
+                                <td><code>Property</code> or <code>Room</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>room_type_id</code></td>
+                                <td>u32 \| null</td>
+                                <td>Required when <code>level = Room</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>periods</code></td>
+                                <td>ChargePeriod[]</td>
+                                <td>Date ranges, one per configuration. Not required to be non-overlapping.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-4 bg-gray-50 border border-gray-200 rounded-md p-4">
+                        <p class="text-sm font-semibold text-gray-800 mb-2">ChargePeriod</p>
+                        <p class="text-sm text-gray-600 mb-3">
+                            One time-bounded configuration of a charge.
+                        </p>
+                        <table class="model-table">
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>from</code></td>
+                                    <td>date</td>
+                                    <td>Start date, inclusive.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>to</code></td>
+                                    <td>date \| null</td>
+                                    <td>End date, inclusive. <code>null</code> = open-ended.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>mode</code></td>
+                                    <td>enum</td>
+                                    <td><code>PerNight</code>, <code>PerStay</code>, <code>PerPersonPerNight</code>,
+                                        <code>PerPersonPerStay</code>, <code>Percentage</code>,
+                                        <code>Incalculable</code>, <code>PerDay</code>, <code>PerPersonPerDay</code>,
+                                        <code>Variable</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>amount</code></td>
+                                    <td>u32</td>
+                                    <td>Smallest currency unit, or whole percent when <code>mode = Percentage</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>percentage_base</code></td>
+                                    <td>enum[] \| null</td>
+                                    <td>Only with <code>mode = Percentage</code>. Subset of <code>NetRoomPrice</code>,
+                                        <code>PropertyCharges</code>, <code>LocalityCharges</code>. Must include
+                                        <code>NetRoomPrice</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>excluded</code></td>
+                                    <td>bool</td>
+                                    <td><code>true</code> = paid at property, not in <code>total</code>. Returned in
+                                        <code>excluded_taxes</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>child_multipliers</code></td>
+                                    <td>ChildAgeBand[] \| null</td>
+                                    <td>Only for <code>PerPersonPerStay</code> and <code>PerPersonPerNight</code>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-sm text-gray-700 mt-3">
+                            <strong>ChildAgeBand:</strong>
+                            <code>lte</code> (u8, applies to children at or below this age) ·
+                            <code>multiplier</code> (u16, percent: <code>100</code> = 1.0).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ── Promotion ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">Promotion</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        A discount applied to the room price before charges. See <em>Charges &amp; Promotions</em> for
+                        stacking and eligibility rules.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>id</code></td>
+                                <td>u32</td>
+                                <td>Unique within a property.</td>
+                            </tr>
+                            <tr>
+                                <td><code>property_id</code></td>
+                                <td>u32</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>promotion_type</code></td>
+                                <td>u8</td>
+                                <td>OTA-defined code.</td>
+                            </tr>
+                            <tr>
+                                <td><code>promotion_category</code></td>
+                                <td>u8</td>
+                                <td>Best per category wins; up to 3 applied per booking.</td>
+                            </tr>
+                            <tr>
+                                <td><code>target_channel</code></td>
+                                <td>u8</td>
+                                <td><code>0</code> public · <code>1</code> subscribers · <code>2</code> app ·
+                                    <code>3</code> all mobile · <code>255</code> country-targeted.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>target_country</code></td>
+                                <td>string \| null</td>
+                                <td>ISO alpha-2. Required when <code>target_channel = 255</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>min_stay_through</code></td>
+                                <td>u8 \| null</td>
+                                <td>Minimum nights.</td>
+                            </tr>
+                            <tr>
+                                <td><code>non_refundable</code></td>
+                                <td>bool</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>book_date_start</code></td>
+                                <td>date \| null</td>
+                                <td>Booking window.</td>
+                            </tr>
+                            <tr>
+                                <td><code>book_date_end</code></td>
+                                <td>date \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>book_time_start</code></td>
+                                <td>u8 \| null</td>
+                                <td>Hour 0–23.</td>
+                            </tr>
+                            <tr>
+                                <td><code>book_time_end</code></td>
+                                <td>u8 \| null</td>
+                                <td>Hour 0–23.</td>
+                            </tr>
+                            <tr>
+                                <td><code>stay_date_start</code></td>
+                                <td>date</td>
+                                <td>Stay window.</td>
+                            </tr>
+                            <tr>
+                                <td><code>stay_date_end</code></td>
+                                <td>date</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>active_weekdays</code></td>
+                                <td>u8[] \| null</td>
+                                <td><code>1</code> = Monday … <code>7</code> = Sunday.</td>
+                            </tr>
+                            <tr>
+                                <td><code>excluded_dates</code></td>
+                                <td>date[]</td>
+                                <td>Dates removed from the stay window.</td>
+                            </tr>
+                            <tr>
+                                <td><code>additional_dates</code></td>
+                                <td>date[]</td>
+                                <td>Dates added outside the stay window.</td>
+                            </tr>
+                            <tr>
+                                <td><code>discount_value</code></td>
+                                <td>u8</td>
+                                <td>Percent: <code>10</code> = 10%, <code>100</code> = 100%.</td>
+                            </tr>
+                            <tr>
+                                <td><code>room_type_ids</code></td>
+                                <td>u32[]</td>
+                                <td>Empty = all room types.</td>
+                            </tr>
+                            <tr>
+                                <td><code>parent_rate_ids</code></td>
+                                <td>u32[]</td>
+                                <td>Empty = all rates.</td>
+                            </tr>
+                            <tr>
+                                <td><code>early_booker_days</code></td>
+                                <td>u16 \| null</td>
+                                <td>Minimum days between booking and check-in.</td>
+                            </tr>
+                            <tr>
+                                <td><code>last_minute_unit</code></td>
+                                <td>enum \| null</td>
+                                <td><code>Hour</code> or <code>Day</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>last_minute_value</code></td>
+                                <td>u16 \| null</td>
+                                <td>Maximum gap between booking and check-in.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ── AvailabilityDay ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">AvailabilityDay</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Physical inventory for one room type on one date. Per room type, not per rate plan.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>property_id</code></td>
+                                <td>u32</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>room_type_id</code></td>
+                                <td>u32</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>date</code></td>
+                                <td>date</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>rooms_to_sell</code></td>
+                                <td>u8</td>
+                                <td>Rooms available that night.</td>
+                            </tr>
+                            <tr>
+                                <td><code>closed</code></td>
+                                <td>bool</td>
+                                <td><code>true</code> = no sales that night.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ── RateCalendarDay ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">RateCalendarDay</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Price and restrictions for one rate plan on one date. The shape of <code>pricing</code> is
+                        determined by the rate plan's <code>pricing_type</code>.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>property_id</code></td>
+                                <td>u32</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>room_type_id</code></td>
+                                <td>u32</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>rate_plan_id</code></td>
+                                <td>u32</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>date</code></td>
+                                <td>date</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>pricing</code></td>
+                                <td>tagged union</td>
+                                <td>See <em>DailyPricing</em>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>restrictions</code></td>
+                                <td>object</td>
+                                <td>See <em>Restrictions</em>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>child_overrides</code></td>
+                                <td>ChildPrice[]</td>
+                                <td>Per-day overrides. Empty = use the rate's default grid.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mt-4 bg-gray-50 border border-gray-200 rounded-md p-4">
+                        <p class="text-sm font-semibold text-gray-800 mb-2">DailyPricing</p>
+                        <p class="text-sm text-gray-600 mb-3">
+                            Tagged union, serialized as <code>{"type": "...", "data": {...}}</code>. The variant must
+                            match the rate's declared <code>pricing_type</code>.
+                        </p>
+                        <table class="model-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Data</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Standard</code></td>
+                                    <td><code>adult_price</code> (u32), <code>single_price</code> (u32 \| null)</td>
+                                    <td>Flat price per night. <code>single_price</code> applies only when 1 adult and no
+                                        children.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Rlo</code></td>
+                                    <td><code>base_price</code> (u32)</td>
+                                    <td>Price for the leading occupancy. Offsets applied per adult count.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Obp</code></td>
+                                    <td><code>prices</code>: map of <em>adults</em> → price</td>
+                                    <td>One price per adult count. Keyed by adults, not total occupancy.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Los</code></td>
+                                    <td><code>prices</code>: map of <em>nights</em> → map of <em>adults</em> → price
+                                    </td>
+                                    <td>Per-night price. Keyed by nights and adults.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-xs text-gray-600 mt-3">
+                            Maps use string keys in JSON (a wire-format requirement) and are parsed to integers at the
+                            API boundary.
+                        </p>
+                    </div>
+
+                    <div class="mt-4 bg-gray-50 border border-gray-200 rounded-md p-4">
+                        <p class="text-sm font-semibold text-gray-800 mb-2">Restrictions</p>
+                        <table class="model-table">
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>closed</code></td>
+                                    <td>bool</td>
+                                    <td>Rate closed for booking.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>closed_on_arrival</code></td>
+                                    <td>bool</td>
+                                    <td>Cannot check in on this day.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>closed_on_departure</code></td>
+                                    <td>bool</td>
+                                    <td>Cannot check out on this day.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>min_stay</code></td>
+                                    <td>u8 \| null</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><code>max_stay</code></td>
+                                    <td>u8 \| null</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><code>min_stay_arrival</code></td>
+                                    <td>u8 \| null</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><code>max_stay_arrival</code></td>
+                                    <td>u8 \| null</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><code>exact_stay_arrival</code></td>
+                                    <td>u8 \| null</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><code>min_advance_days</code></td>
+                                    <td>u16 \| null</td>
+                                    <td>Minimum days between booking and check-in.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>max_advance_days</code></td>
+                                    <td>u16 \| null</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ── Body wrappers ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">Body wrappers</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Bulk endpoints send a list wrapped under a named key.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Contents</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>room_types</code></td>
+                                <td>RoomType[]</td>
+                            </tr>
+                            <tr>
+                                <td><code>room_rates</code></td>
+                                <td>RoomRate[]</td>
+                            </tr>
+                            <tr>
+                                <td><code>charges</code></td>
+                                <td>Charge[]</td>
+                            </tr>
+                            <tr>
+                                <td><code>promotions</code></td>
+                                <td>Promotion[]</td>
+                            </tr>
+                            <tr>
+                                <td><code>days</code></td>
+                                <td>AvailabilityDay[] (on availability endpoint)</td>
+                            </tr>
+                            <tr>
+                                <td><code>days</code></td>
+                                <td>RateCalendarDay[] (on calendar endpoint)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ── SearchRequest ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">SearchRequest</h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Search input. At least one location field is required unless <code>property_ids</code> is
+                        provided.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>city</code></td>
+                                <td>i32 \| null</td>
+                                <td>Location filters — at least one required unless <code>property_ids</code> is set.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>district</code></td>
+                                <td>u32 \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>country</code></td>
+                                <td>string \| null</td>
+                                <td>ISO alpha-2.</td>
+                            </tr>
+                            <tr>
+                                <td><code>region</code></td>
+                                <td>u32 \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>coordinates</code></td>
+                                <td>object \| null</td>
+                                <td>See <em>Coordinates</em>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>category</code></td>
+                                <td>u8 \| null</td>
+                                <td>Property category filter.</td>
+                            </tr>
+                            <tr>
+                                <td><code>property_ids</code></td>
+                                <td>u32[] \| null</td>
+                                <td>Search only these properties. Bypasses location filters.</td>
+                            </tr>
+                            <tr>
+                                <td><code>check_in</code></td>
+                                <td>date</td>
+                                <td>Required.</td>
+                            </tr>
+                            <tr>
+                                <td><code>check_out</code></td>
+                                <td>date</td>
+                                <td>Required. Must be after <code>check_in</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>adults</code></td>
+                                <td>u8</td>
+                                <td>Total adults across all rooms.</td>
+                            </tr>
+                            <tr>
+                                <td><code>children</code></td>
+                                <td>u8</td>
+                                <td>Total children across all rooms.</td>
+                            </tr>
+                            <tr>
+                                <td><code>child_ages</code></td>
+                                <td>u8[]</td>
+                                <td>One entry per child, any order.</td>
+                            </tr>
+                            <tr>
+                                <td><code>number_of_rooms</code></td>
+                                <td>u8</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>stars</code></td>
+                                <td>u8[] \| null</td>
+                                <td>Star ratings to include.</td>
+                            </tr>
+                            <tr>
+                                <td><code>min_review_score</code></td>
+                                <td>u8 \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>room_codes</code></td>
+                                <td>u32[] \| null</td>
+                                <td>Room type codes. Matched against <code>room_type_code</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>property_facilities</code></td>
+                                <td>u32[] \| null</td>
+                                <td>Property-level facility codes.</td>
+                            </tr>
+                            <tr>
+                                <td><code>brands</code></td>
+                                <td>u32[] \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>room_facilities</code></td>
+                                <td>u32[] \| null</td>
+                                <td>Room feature codes.</td>
+                            </tr>
+                            <tr>
+                                <td><code>bed_filter</code></td>
+                                <td>u32[] \| null</td>
+                                <td>Bed type codes.</td>
+                            </tr>
+                            <tr>
+                                <td><code>meal_plan</code></td>
+                                <td>string \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>cancellation_type</code></td>
+                                <td>string \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>price_min</code></td>
+                                <td>u32 \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>price_max</code></td>
+                                <td>u32 \| null</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><code>booking_date</code></td>
+                                <td>date \| null</td>
+                                <td>Defaults to today.</td>
+                            </tr>
+                            <tr>
+                                <td><code>guest_origin</code></td>
+                                <td>enum</td>
+                                <td><code>Any</code> (default), <code>Domestic</code>, <code>International</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>travel_purpose</code></td>
+                                <td>enum</td>
+                                <td><code>Any</code> (default), <code>Leisure</code>, <code>Business</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>is_subscriber</code></td>
+                                <td>bool</td>
+                                <td>Default <code>false</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>user_country</code></td>
+                                <td>2-byte array</td>
+                                <td>ISO alpha-2. Default <code>[0,0]</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>device</code></td>
+                                <td>enum</td>
+                                <td><code>Desktop</code> (default), <code>MobileBrowser</code>,
+                                    <code>TabletBrowser</code>, <code>App</code>.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-sm text-gray-600 mt-3">
+                        <strong>Coordinates:</strong> <code>latitude</code> (f64) · <code>longitude</code> (f64) ·
+                        <code>radius</code> (u8).
+                    </p>
+                </div>
+
+            </div>
+        </section>
+        <section id="deployment" class="content-section hidden">
+            <div class="p-6 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Deployment</h2>
+                    <p class="text-gray-600 mt-1">Run a node in the Veyoz cluster.</p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">CLI Usage</h3>
+                    <pre class="bg-gray-900 text-gray-100 text-sm rounded-md p-4 overflow-x-auto"><code>veyoz run \
+  --node-id &lt;NODE_ID&gt; \
+  --shard-id &lt;SHARD_ID&gt; \
+  --zone-id &lt;ZONE_ID&gt; \
+  --cert-path &lt;CERT.pem&gt; \
+  --key-path &lt;KEY.pem&gt; \
+  --ca-cert-path &lt;CA.pem&gt; \
+  --resolver-addr &lt;RESOLVER_URL&gt; \
+  [--config &lt;CONFIG.yaml&gt;] \
+  [--initial-voters &lt;ID1,ID2,...&gt;] \
+  [--api-listen-addr &lt;ADDR&gt;] \
+  [--quic-listen-addr &lt;ADDR&gt;] \
+  [--data-dir &lt;PATH&gt;]</code></pre>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Required Arguments</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li><strong class="font-semibold text-gray-900">--node-id</strong> — Unique identifier for this
+                            node.</li>
+                        <li><strong class="font-semibold text-gray-900">--shard-id</strong> — Unique identifier for the
+                            shard.</li>
+                        <li><strong class="font-semibold text-gray-900">--zone-id</strong> — Identifier for the zone
+                            this node belongs to.</li>
+                        <li><strong class="font-semibold text-gray-900">--cert-path</strong> — Path to the TLS
+                            certificate file.</li>
+                        <li><strong class="font-semibold text-gray-900">--key-path</strong> — Path to the TLS private
+                            key file.</li>
+                        <li><strong class="font-semibold text-gray-900">--ca-cert-path</strong> — Path to the CA
+                            certificate file.</li>
+                        <li><strong class="font-semibold text-gray-900">--resolver-addr</strong> — Resolver service base
+                            URL.</li>
+                    </ul>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-5 space-y-3">
+                    <h3 class="text-base font-semibold text-blue-900">Resolver Service</h3>
+                    <p class="text-sm text-blue-800">
+                        <code class="font-mono text-xs bg-blue-100 px-1 py-0.5 rounded">--resolver-addr</code>
+                        points to an external HTTP service that <strong class="font-semibold">you implement</strong>.
+                        Veyoz does not ship one.
+                    </p>
+                    <p class="text-sm text-blue-800">
+                        When a node needs to reach another node by id, it calls:
+                    </p>
+                    <pre class="bg-white border border-blue-200 text-gray-800 text-sm rounded-md p-3 overflow-x-auto"><code>GET {resolver_addr}/{node_id}
+
+→ 200 OK
+  &lt;hostname&gt;</code></pre>
+                    <p class="text-sm text-blue-800">
+                        The response body is the hostname (or address) of the node as a plain string.
+                    </p>
+                    <p class="text-sm text-blue-800">
+                        This decouples Veyoz from your infrastructure. DNS, IPs, and topology can
+                        change however you like — the resolver is the only place that knows.
+                        Veyoz never needs to be reconfigured when your network changes.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Optional Arguments</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li><strong class="font-semibold text-gray-900">--config</strong> — Path to the YAML
+                            configuration file.</li>
+                        <li><strong class="font-semibold text-gray-900">--initial-voters</strong> — Comma-separated list
+                            of node IDs for initial voting members.</li>
+                        <li><strong class="font-semibold text-gray-900">--api-listen-addr</strong> — API listen address
+                            (overrides config).</li>
+                        <li><strong class="font-semibold text-gray-900">--quic-listen-addr</strong> — QUIC listen
+                            address (overrides config).</li>
+                        <li><strong class="font-semibold text-gray-900">--data-dir</strong> — Data directory path
+                            (overrides config).</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Configuration File</h3>
+                    <p class="text-sm text-gray-700">
+                        Values in the YAML config can be overridden by CLI flags. Identity, paths, and external
+                        service settings (marked with <em>CLI only</em>) are not read from the YAML file.
+                    </p>
+
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900 mb-2">Cluster</h4>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">quic_listen_addr</strong> — QUIC listen
+                                address. Default: <code
+                                    class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">0.0.0.0</code>.</li>
+                            <li><strong class="font-semibold text-gray-900">quic_port</strong> — QUIC listen port.
+                                Default: <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">17777</code>.
+                            </li>
+                            <li><strong class="font-semibold text-gray-900">raft_tick_ms</strong> — Raft tick interval
+                                in milliseconds. Default: <code
+                                    class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">30</code>.</li>
+                            <li><strong class="font-semibold text-gray-900">raft_election_tick</strong> — Raft election
+                                tick count. Default: <code
+                                    class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">60</code>.</li>
+                            <li><strong class="font-semibold text-gray-900">raft_heartbeat_tick</strong> — Raft
+                                heartbeat tick count. Default: <code
+                                    class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">15</code>.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900 mb-2">Server</h4>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">api_listen_addr</strong> — API listen
+                                address. Default: <code
+                                    class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">0.0.0.0</code>.</li>
+                            <li><strong class="font-semibold text-gray-900">api_port</strong> — API listen port.
+                                Default: <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">8080</code>.
+                            </li>
+                            <li><strong class="font-semibold text-gray-900">snapshot_interval_sec</strong> — Interval
+                                between snapshots in seconds. Default: <code
+                                    class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">60</code>.</li>
+                            <li><strong class="font-semibold text-gray-900">snapshot_trigger_count</strong> — Number of
+                                log entries before triggering a snapshot. Default: <code
+                                    class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">10_000</code>.</li>
+                            <li><strong class="font-semibold text-gray-900">wal_flush_threshold</strong> — WAL flush
+                                threshold in entries. Default: <code
+                                    class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">2000</code>.</li>
+                            <li><strong class="font-semibold text-gray-900">search_queue_timeout_ms</strong> — Search
+                                queue timeout in milliseconds. Default: <code
+                                    class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">10</code>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-5 space-y-2">
+                    <h3 class="text-base font-semibold text-amber-900">Cluster Membership</h3>
+                    <p class="text-sm text-amber-800">
+                        <strong class="font-semibold">--initial-voters</strong> is the seed list of voting members.
+                        If a node's ID is <strong class="font-semibold">not</strong> present in the seed list, it joins
+                        the cluster
+                        as a <strong class="font-semibold">learner</strong> instead of a voter.
+                    </p>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-5 space-y-2">
+                    <h3 class="text-base font-semibold text-amber-900">TLS Certificates</h3>
+                    <p class="text-sm text-amber-800">
+                        For node-to-node communication, only the <strong class="font-semibold">certificate
+                            chain</strong> and
+                        <strong class="font-semibold">expiration dates</strong> are validated. Hostname verification is
+                        <strong class="font-semibold">not</strong> performed.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="api" class="content-section hidden">
+            <div class="p-6 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">API</h2>
+                    <p class="text-gray-600 mt-1">
+                        HTTP API for reading and writing Veyoz data. All data routes are under
+                        <code class="font-mono text-sm bg-gray-100 px-1 py-0.5 rounded">/api</code>.
+                        Bodies and responses are JSON. Model shapes are defined in
+                        <a href="#models" class="text-blue-600 hover:underline">Models</a>.
+                    </p>
+                </div>
+
+                <!-- ── Availability & Middleware ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Availability & Middleware</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>
+                            <strong class="font-semibold text-gray-900">Node availability.</strong>
+                            Every <code>/api</code> route is gated. A node with no quorum returns
+                            <code>503</code> with <code>{ "error": "node unavailable: cluster lost quorum" }</code>.
+                        </li>
+                        <li>
+                            <strong class="font-semibold text-gray-900">Compression.</strong>
+                            gzip, brotli, and zstd are negotiated.
+                        </li>
+                        <li>
+                            <strong class="font-semibold text-gray-900">CORS.</strong>
+                            Any origin, any method, any header.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ── Endpoints by resource ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Data routes</h3>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Method &amp; path</th>
+                                <th>Body</th>
+                                <th>Response</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Property -->
+                            <tr>
+                                <td><code>POST /api/properties</code></td>
+                                <td>Property</td>
+                                <td>write</td>
+                                <td>Upsert a property.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /api/properties/{pid}</code></td>
+                                <td>—</td>
+                                <td>Property</td>
+                                <td>Read one property.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DELETE /api/properties/{pid}</code></td>
+                                <td>—</td>
+                                <td>write</td>
+                                <td>Delete a property.</td>
+                            </tr>
+
+                            <!-- Room types -->
+                            <tr>
+                                <td><code>POST /api/properties/{pid}/room-types</code></td>
+                                <td>RoomTypesBody</td>
+                                <td>write</td>
+                                <td>Upsert room types for a property.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /api/properties/{pid}/room-types</code></td>
+                                <td>—</td>
+                                <td>RoomType[]</td>
+                                <td>List room types.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DELETE /api/properties/{pid}/room-types/{rt_id}</code></td>
+                                <td>—</td>
+                                <td>write</td>
+                                <td>Delete a room type. Cascades to its rates, availability, and calendar.</td>
+                            </tr>
+
+                            <!-- Room rates -->
+                            <tr>
+                                <td><code>POST /api/properties/{pid}/room-types/{rt_id}/room-rates</code></td>
+                                <td>RoomRatesBody</td>
+                                <td>write</td>
+                                <td>Upsert room rates.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /api/properties/{pid}/room-types/{rt_id}/room-rates</code></td>
+                                <td>—</td>
+                                <td>RoomRate[]</td>
+                                <td>List room rates.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DELETE /api/properties/{pid}/room-types/{rt_id}/room-rates/{rate_plan_id}</code>
+                                </td>
+                                <td>—</td>
+                                <td>write</td>
+                                <td>Delete a room rate. Cascades to its calendar.</td>
+                            </tr>
+
+                            <!-- Charges -->
+                            <tr>
+                                <td><code>POST /api/properties/{pid}/charges</code></td>
+                                <td>ChargesBody</td>
+                                <td>write</td>
+                                <td>Upsert charges.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /api/properties/{pid}/charges</code></td>
+                                <td>—</td>
+                                <td>Charge[]</td>
+                                <td>List charges.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DELETE /api/properties/{pid}/charges/{charge_id}</code></td>
+                                <td>—</td>
+                                <td>write</td>
+                                <td>Delete a charge.</td>
+                            </tr>
+
+                            <!-- Promotions -->
+                            <tr>
+                                <td><code>POST /api/properties/{pid}/promotions</code></td>
+                                <td>PromotionsBody</td>
+                                <td>write</td>
+                                <td>Upsert promotions.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /api/properties/{pid}/promotions</code></td>
+                                <td>—</td>
+                                <td>Promotion[]</td>
+                                <td>List promotions.</td>
+                            </tr>
+                            <tr>
+                                <td><code>DELETE /api/properties/{pid}/promotions/{promo_id}</code></td>
+                                <td>—</td>
+                                <td>write</td>
+                                <td>Delete a promotion.</td>
+                            </tr>
+
+                            <!-- Availability -->
+                            <tr>
+                                <td><code>POST /api/properties/{pid}/room-types/{rt_id}/availability</code></td>
+                                <td>AvailabilityBody</td>
+                                <td>write</td>
+                                <td>Set availability days.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /api/properties/{pid}/room-types/{rt_id}/availability</code></td>
+                                <td>—</td>
+                                <td>AvailabilityDay[]</td>
+                                <td>Read availability days.</td>
+                            </tr>
+
+                            <!-- Calendar -->
+                            <tr>
+                                <td><code>POST /api/properties/{pid}/room-types/{rt_id}/room-rates/{rate_plan_id}/calendar</code>
+                                </td>
+                                <td>RateCalendarBody</td>
+                                <td>write</td>
+                                <td>Set rate calendar days.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /api/properties/{pid}/room-types/{rt_id}/room-rates/{rate_plan_id}/calendar</code>
+                                </td>
+                                <td>—</td>
+                                <td>RateCalendarDay[]</td>
+                                <td>Read rate calendar days.</td>
+                            </tr>
+
+                            <!-- Matrix -->
+                            <tr>
+                                <td><code>POST /api/properties/{pid}/matrix</code></td>
+                                <td>MatrixRequest</td>
+                                <td>MatrixResult</td>
+                                <td>Compute the full rate matrix for one property. Read-only.</td>
+                            </tr>
+
+                            <!-- Search -->
+                            <tr>
+                                <td><code>POST /api/search</code></td>
+                                <td>SearchRequest</td>
+                                <td>SearchResponse</td>
+                                <td>Search across all properties. Read-only.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                        <p class="text-sm text-amber-800">
+                            <strong class="font-semibold">Calendar POST body.</strong>
+                            The <code>pricing</code> field is a tagged union. OBP and LOS use maps with
+                            <strong>string</strong> keys (<code>"1"</code>, <code>"2"</code>) at the wire level;
+                            they are parsed to integers at the API boundary. Malformed keys are rejected with
+                            a validation error.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ── Management routes ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">Management routes</h3>
+                    <p class="text-sm text-gray-600 mb-3">
+                        Served at the root, not under <code>/api</code>. Not gated by node-availability middleware.
+                    </p>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Method &amp; path</th>
+                                <th>Response</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>GET /healthz</code></td>
+                                <td>text</td>
+                                <td><code>200 active_leader</code>, <code>200 active_follower</code>, or
+                                    <code>503 unavailable</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /metrics</code></td>
+                                <td>text</td>
+                                <td>Prometheus metrics.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /node-info</code></td>
+                                <td>JSON</td>
+                                <td>This node's <code>leader_id</code>, <code>shard_id</code>, <code>zone_id</code>,
+                                    <code>node_id</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /leader</code></td>
+                                <td>text</td>
+                                <td>Current leader id. Empty if unknown.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GET /peers</code></td>
+                                <td>JSON</td>
+                                <td>List of peer node ids.</td>
+                            </tr>
+                            <tr>
+                                <td><code>POST /admin/add-member/{node_id}</code></td>
+                                <td>JSON</td>
+                                <td><code>202 "add in progress"</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>POST /admin/remove-member/{node_id}</code></td>
+                                <td>JSON</td>
+                                <td><code>202 "remove in progress"</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>POST /admin/transfer-leader/{node_id}</code></td>
+                                <td>JSON</td>
+                                <td><code>202 "transfer in progress"</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ── Response shapes ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Response shapes</h3>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Kind</th>
+                                <th>Returned by</th>
+                                <th>Shape</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong class="font-semibold text-gray-900">Write</strong></td>
+                                <td>All POST and DELETE data routes.</td>
+                                <td><code>204 No Content</code> on success. On failure, an error body from the shared
+                                    error pipeline.</td>
+                            </tr>
+                            <tr>
+                                <td><strong class="font-semibold text-gray-900">Read</strong></td>
+                                <td>All GET data routes.</td>
+                                <td><code>200</code> with the requested model or list.</td>
+                            </tr>
+                            <tr>
+                                <td><strong class="font-semibold text-gray-900">Search / Matrix</strong></td>
+                                <td><code>POST /api/search</code>, <code>POST /api/properties/{{pid}}/matrix</code>.
+                                </td>
+                                <td><code>200</code> with the result. Read-only, does not go through Raft.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ── Errors ── -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Errors</h3>
+                    <table class="model-table">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Meaning</th>
+                                <th>Retry?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>400</code></td>
+                                <td>Validation error. The request body failed a model or domain rule.</td>
+                                <td>No. Fix the request.</td>
+                            </tr>
+                            <tr>
+                                <td><code>401</code></td>
+                                <td>Authentication failed.</td>
+                                <td>No.</td>
+                            </tr>
+                            <tr>
+                                <td><code>403</code></td>
+                                <td>Forbidden.</td>
+                                <td>No.</td>
+                            </tr>
+                            <tr>
+                                <td><code>404</code></td>
+                                <td>Resource not found.</td>
+                                <td>No.</td>
+                            </tr>
+                            <tr>
+                                <td><code>409</code></td>
+                                <td>Conflict.</td>
+                                <td>No.</td>
+                            </tr>
+                            <tr>
+                                <td><code>503</code></td>
+                                <td>Node unavailable (no quorum) or overloaded (search backpressure).</td>
+                                <td>Yes. Retry on another follower, or wait. <code>Retry-After</code> is set when
+                                    relevant.</td>
+                            </tr>
+                            <tr>
+                                <td><code>500</code></td>
+                                <td>Internal error.</td>
+                                <td>Yes, once. Then investigate.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section id="bulk-import" class="content-section hidden">
+            <div class="p-6 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Bulk Import</h2>
+                    <p class="text-gray-600 mt-1">
+                        Build a seed snapshot offline from CSV files. Provide the CSVs, run
+                        <code class="font-mono text-sm bg-gray-100 px-1 py-0.5 rounded">veyoz snapshot</code>,
+                        and load the result on each bootstrapping node.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Flow</h3>
+                    <pre
+                        class="bg-gray-900 text-gray-100 text-sm rounded-md p-4 overflow-x-auto"><code>your DB  →  export CSVs  →  veyoz snapshot  →  snapshot dir  →  copy to node(s)  →  veyoz boots from it</code></pre>
+                    <p class="text-sm text-gray-700">
+                        Veyoz loads millions of records in seconds from the snapshot. After that,
+                        you only send deltas through the API.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">CLI Usage</h3>
+                    <pre class="bg-gray-900 text-gray-100 text-sm rounded-md p-4 overflow-x-auto"><code>veyoz snapshot \
+  --shard-id &lt;SHARD_ID&gt; \
+  --input-path &lt;CSV_DIR&gt; \
+  --output-path &lt;SNAPSHOT_DIR&gt;</code></pre>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li><strong class="font-semibold text-gray-900">--shard-id</strong> — Unique identifier for the
+                            shard this snapshot belongs to.</li>
+                        <li><strong class="font-semibold text-gray-900">--input-path</strong> — Directory containing the
+                            CSV files.</li>
+                        <li><strong class="font-semibold text-gray-900">--output-path</strong> — Directory where the
+                            snapshot will be written.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Output</h3>
+                    <p class="text-sm text-gray-700">The builder writes the following into the output directory, plus a
+                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">.zip</code> archive next to it:
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li><strong class="font-semibold text-gray-900">manifest.json</strong> — Snapshot metadata.</li>
+                        <li><strong class="font-semibold text-gray-900">props.bin</strong> — Filter bitmaps.</li>
+                        <li><strong class="font-semibold text-gray-900">mapper.bin</strong> — Code ↔ slot tables.</li>
+                        <li><strong class="font-semibold text-gray-900">review_scores.bin</strong> — Per-property review
+                            scores.</li>
+                        <li><strong class="font-semibold text-gray-900">min_ages.bin</strong> — Per-property minimum
+                            child ages.</li>
+                        <li><strong class="font-semibold text-gray-900">meta.bin</strong> — Per-property metadata.</li>
+                        <li><strong class="font-semibold text-gray-900">bucket_*.bin</strong> — Property pages, sharded
+                            across buckets.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Format Rules</h3>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li><strong class="font-semibold text-gray-900">Encoding</strong> — UTF-8. Non-UTF-8 bytes are
+                            rejected.</li>
+                        <li><strong class="font-semibold text-gray-900">Separator</strong> — Comma (<code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">,</code>). No quoting, no
+                            escaping, no commas inside values.</li>
+                        <li><strong class="font-semibold text-gray-900">Header</strong> — Every file must have a header
+                            row. It is skipped and not validated.</li>
+                        <li><strong class="font-semibold text-gray-900">Multi-value fields</strong> — Pipe-separated
+                            (<code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">1|2|3</code>).</li>
+                        <li><strong class="font-semibold text-gray-900">Empty fields</strong> — Mean "not set" for
+                            optional values.</li>
+                        <li><strong class="font-semibold text-gray-900">Money</strong> — Integers in the smallest
+                            currency unit (e.g., EUR cents). No decimals, no floats.</li>
+                        <li><strong class="font-semibold text-gray-900">Dates</strong> — ISO 8601 (<code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">YYYY-MM-DD</code>).</li>
+                        <li><strong class="font-semibold text-gray-900">Country codes</strong> — ISO 3166-1 alpha-2,
+                            uppercase (<code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">US</code>, <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">TR</code>, <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">DE</code>). Lowercase is
+                            accepted and normalized to uppercase.</li>
+                        <li><strong class="font-semibold text-gray-900">IDs</strong> — Integers.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Files</h3>
+                    <p class="text-sm text-gray-700">Place all CSVs in one input directory. File names are fixed.</p>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li><strong class="font-semibold text-gray-900">properties.csv</strong> — Required. One row per
+                            property.</li>
+                        <li><strong class="font-semibold text-gray-900">room_types.csv</strong> — Optional. One row per
+                            room type.</li>
+                        <li><strong class="font-semibold text-gray-900">room_rates.csv</strong> — Optional. One row per
+                            rate plan.</li>
+                        <li><strong class="font-semibold text-gray-900">availability.csv</strong> — Optional. One row
+                            per (room type, date).</li>
+                        <li><strong class="font-semibold text-gray-900">calendar.csv</strong> — Optional. One row per
+                            (rate plan, date).</li>
+                        <li><strong class="font-semibold text-gray-900">charges.csv</strong> — Optional. One row per
+                            charge.</li>
+                        <li><strong class="font-semibold text-gray-900">promotions.csv</strong> — Optional. One row per
+                            promotion.</li>
+                    </ul>
+                    <p class="text-sm text-gray-700">
+                        If an optional file is absent or empty (header only), that entity is treated as "none" for all
+                        properties.
+                    </p>
+                </div>
+
+                <!-- properties.csv -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">properties.csv</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-gray-700 border border-gray-200 rounded-md">
+                            <thead class="bg-gray-50 text-gray-900">
+                                <tr>
+                                    <th class="text-left px-3 py-2 font-semibold">#</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Column</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Type</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="px-3 py-2">0</td>
+                                    <td class="px-3 py-2 font-mono">property_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Your property identifier. Must be unique.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">1</td>
+                                    <td class="px-3 py-2 font-mono">category</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">Property category code.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">2</td>
+                                    <td class="px-3 py-2 font-mono">rating</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">Star rating, 1–5. 0 or other values mean unrated.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">3</td>
+                                    <td class="px-3 py-2 font-mono">review_score</td>
+                                    <td class="px-3 py-2">u16</td>
+                                    <td class="px-3 py-2">Review score.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">4</td>
+                                    <td class="px-3 py-2 font-mono">city</td>
+                                    <td class="px-3 py-2">i32</td>
+                                    <td class="px-3 py-2">Signed city identifier.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">5</td>
+                                    <td class="px-3 py-2 font-mono">district</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">District identifier. 0 = none.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">6</td>
+                                    <td class="px-3 py-2 font-mono">country</td>
+                                    <td class="px-3 py-2">string</td>
+                                    <td class="px-3 py-2">ISO 3166-1 alpha-2, uppercase.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">7</td>
+                                    <td class="px-3 py-2 font-mono">region</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Region identifier. 0 = none.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">8</td>
+                                    <td class="px-3 py-2 font-mono">lat</td>
+                                    <td class="px-3 py-2">f64</td>
+                                    <td class="px-3 py-2">Latitude.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">9</td>
+                                    <td class="px-3 py-2 font-mono">lon</td>
+                                    <td class="px-3 py-2">f64</td>
+                                    <td class="px-3 py-2">Longitude.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">10</td>
+                                    <td class="px-3 py-2 font-mono">tax_inclusive</td>
+                                    <td class="px-3 py-2">bool</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">true</code> /
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">false</code> /
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">1</code> / <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">0</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">11</td>
+                                    <td class="px-3 py-2 font-mono">filter_codes</td>
+                                    <td class="px-3 py-2">list of u32</td>
+                                    <td class="px-3 py-2">Property-level filter codes, pipe-separated. Max 64 distinct
+                                        codes across the whole dataset.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">12</td>
+                                    <td class="px-3 py-2 font-mono">child_accepted</td>
+                                    <td class="px-3 py-2">string</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">AdultOnly</code>
+                                        or <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">ChildrenAllowed</code>
+                                        (empty = <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">AdultOnly</code>).
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">13</td>
+                                    <td class="px-3 py-2 font-mono">child_min_age</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">Minimum child age (only if <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">ChildrenAllowed</code>).
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">14</td>
+                                    <td class="px-3 py-2 font-mono">child_buckets</td>
+                                    <td class="px-3 py-2">list of <code class="font-mono">min^max</code></td>
+                                    <td class="px-3 py-2">Age buckets, pipe-separated. Up to 4. Sorted, non-overlapping.
+                                        Lowest <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">min</code> must
+                                        equal <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">child_min_age</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">15</td>
+                                    <td class="px-3 py-2 font-mono">child_max_per_bucket</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">Max children tracked per bucket.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pre class="bg-gray-900 text-gray-100 text-xs rounded-md p-4 overflow-x-auto"><code>property_id,category,rating,review_score,city,district,country,region,lat,lon,tax_inclusive,filter_codes,child_accepted,child_min_age,child_buckets,child_max_per_bucket
+1,4,4,85,10,5,TR,1,41.0,29.0,false,12|47,,,,
+2,3,5,92,10,5,TR,1,41.1,29.1,true,,ChildrenAllowed,0,0^3|4^12,2</code></pre>
+                </div>
+
+                <!-- room_types.csv -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">room_types.csv</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-gray-700 border border-gray-200 rounded-md">
+                            <thead class="bg-gray-50 text-gray-900">
+                                <tr>
+                                    <th class="text-left px-3 py-2 font-semibold">#</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Column</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Type</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="px-3 py-2">0</td>
+                                    <td class="px-3 py-2 font-mono">property_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Must exist in properties.csv.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">1</td>
+                                    <td class="px-3 py-2 font-mono">room_type_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Your room type identifier.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">2</td>
+                                    <td class="px-3 py-2 font-mono">room_type_code</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Code for static cache lookup.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">3</td>
+                                    <td class="px-3 py-2 font-mono">max_occupancy</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">Total occupancy.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">4</td>
+                                    <td class="px-3 py-2 font-mono">max_adults</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">5</td>
+                                    <td class="px-3 py-2 font-mono">max_children</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">6</td>
+                                    <td class="px-3 py-2 font-mono">total_units</td>
+                                    <td class="px-3 py-2">u16</td>
+                                    <td class="px-3 py-2">Physical units of this room type.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">7</td>
+                                    <td class="px-3 py-2 font-mono">features</td>
+                                    <td class="px-3 py-2">list of u32</td>
+                                    <td class="px-3 py-2">Room feature codes, pipe-separated.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">8</td>
+                                    <td class="px-3 py-2 font-mono">bed_types</td>
+                                    <td class="px-3 py-2">list of u32</td>
+                                    <td class="px-3 py-2">Bed type codes, pipe-separated.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- room_rates.csv -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">room_rates.csv</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-gray-700 border border-gray-200 rounded-md">
+                            <thead class="bg-gray-50 text-gray-900">
+                                <tr>
+                                    <th class="text-left px-3 py-2 font-semibold">#</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Column</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Type</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="px-3 py-2">0</td>
+                                    <td class="px-3 py-2 font-mono">property_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">1</td>
+                                    <td class="px-3 py-2 font-mono">room_type_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Must exist in room_types.csv.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">2</td>
+                                    <td class="px-3 py-2 font-mono">rate_plan_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Your rate plan identifier.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">3</td>
+                                    <td class="px-3 py-2 font-mono">max_occupancy</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">Optional override; if set, min(rate, room type) is used.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">4</td>
+                                    <td class="px-3 py-2 font-mono">pricing_type</td>
+                                    <td class="px-3 py-2">string</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Standard</code>,
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Rlo</code>,
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Obp</code>, or
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Los</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">5</td>
+                                    <td class="px-3 py-2 font-mono">meal_code</td>
+                                    <td class="px-3 py-2">u32 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">6</td>
+                                    <td class="px-3 py-2 font-mono">cancellation_policy_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">7</td>
+                                    <td class="px-3 py-2 font-mono">value_adds</td>
+                                    <td class="px-3 py-2">list of u32</td>
+                                    <td class="px-3 py-2">Value-add codes, pipe-separated.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">8</td>
+                                    <td class="px-3 py-2 font-mono">rlo_leading_occupancy</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">Required if <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">pricing_type = Rlo</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">9</td>
+                                    <td class="px-3 py-2 font-mono">rlo_offsets</td>
+                                    <td class="px-3 py-2">list of <code
+                                            class="font-mono">persons^type^value^round</code></td>
+                                    <td class="px-3 py-2">Required if <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">pricing_type = Rlo</code>.
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">type</code> is
+                                        <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Percentage</code>
+                                        or <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Absolute</code>.
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">round</code> is
+                                        <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">true</code>/<code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">false</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">10</td>
+                                    <td class="px-3 py-2 font-mono">child_pricing</td>
+                                    <td class="px-3 py-2">list of <code
+                                            class="font-mono">bucket^index^amount^per_stay</code></td>
+                                    <td class="px-3 py-2">Default child pricing grid, pipe-separated.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">RLO offset rules</strong></p>
+                        <ul class="space-y-2 text-sm text-gray-700 list-disc pl-5">
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">persons</code> — the
+                                occupancy this offset applies to. Must differ from <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">rlo_leading_occupancy</code>.
+                            </li>
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">type = Percentage</code> —
+                                <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">value</code> is a whole
+                                percent (e.g., <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">25</code> =
+                                +25%, <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">-15</code> = −15%).
+                                Minimum <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">-100</code>.
+                            </li>
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">type = Absolute</code> —
+                                <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">value</code> is in the same
+                                unit as prices (smallest currency unit).
+                            </li>
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">round = true</code> — round
+                                the final adjusted price down.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">Child pricing rules</strong></p>
+                        <ul class="space-y-2 text-sm text-gray-700 list-disc pl-5">
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">bucket</code> — index into
+                                the property's <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">child_buckets</code>
+                                (0-based).</li>
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">index</code> — 0-based
+                                position within the bucket, must be <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">&lt; child_max_per_bucket</code>.
+                            </li>
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">amount</code> — fixed
+                                monetary amount, same unit as prices. Percentages are not supported; resolve them
+                                upstream.</li>
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">per_stay</code> — <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">true</code> = charge once per
+                                stay. <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">false</code> = charge
+                                per night.</li>
+                            <li>Missing cells default to free (0).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- availability.csv -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">availability.csv</h3>
+                    <p class="text-sm text-gray-700">One row per (room type, date).</p>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-gray-700 border border-gray-200 rounded-md">
+                            <thead class="bg-gray-50 text-gray-900">
+                                <tr>
+                                    <th class="text-left px-3 py-2 font-semibold">#</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Column</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Type</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="px-3 py-2">0</td>
+                                    <td class="px-3 py-2 font-mono">property_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">1</td>
+                                    <td class="px-3 py-2 font-mono">room_type_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">2</td>
+                                    <td class="px-3 py-2 font-mono">date</td>
+                                    <td class="px-3 py-2">date</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">YYYY-MM-DD</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">3</td>
+                                    <td class="px-3 py-2 font-mono">rooms_to_sell</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">Physical rooms available.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">4</td>
+                                    <td class="px-3 py-2 font-mono">closed</td>
+                                    <td class="px-3 py-2">bool</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">true</code> = no
+                                        sales that day.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- calendar.csv -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">calendar.csv</h3>
+                    <p class="text-sm text-gray-700">One row per (rate plan, date). This is the pricing and restriction
+                        calendar.</p>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-gray-700 border border-gray-200 rounded-md">
+                            <thead class="bg-gray-50 text-gray-900">
+                                <tr>
+                                    <th class="text-left px-3 py-2 font-semibold">#</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Column</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Type</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="px-3 py-2">0</td>
+                                    <td class="px-3 py-2 font-mono">property_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">1</td>
+                                    <td class="px-3 py-2 font-mono">room_type_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">2</td>
+                                    <td class="px-3 py-2 font-mono">rate_plan_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">3</td>
+                                    <td class="px-3 py-2 font-mono">date</td>
+                                    <td class="px-3 py-2">date</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">YYYY-MM-DD</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">4</td>
+                                    <td class="px-3 py-2 font-mono">closed</td>
+                                    <td class="px-3 py-2">bool</td>
+                                    <td class="px-3 py-2">Rate closed for booking.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">5</td>
+                                    <td class="px-3 py-2 font-mono">closed_on_arrival</td>
+                                    <td class="px-3 py-2">bool</td>
+                                    <td class="px-3 py-2">Cannot check in on this day.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">6</td>
+                                    <td class="px-3 py-2 font-mono">closed_on_departure</td>
+                                    <td class="px-3 py-2">bool</td>
+                                    <td class="px-3 py-2">Cannot check out on this day.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">7</td>
+                                    <td class="px-3 py-2 font-mono">min_stay</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">8</td>
+                                    <td class="px-3 py-2 font-mono">max_stay</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">9</td>
+                                    <td class="px-3 py-2 font-mono">min_stay_arrival</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">10</td>
+                                    <td class="px-3 py-2 font-mono">max_stay_arrival</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">11</td>
+                                    <td class="px-3 py-2 font-mono">exact_stay_arrival</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">12</td>
+                                    <td class="px-3 py-2 font-mono">min_advance_days</td>
+                                    <td class="px-3 py-2">u16 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">13</td>
+                                    <td class="px-3 py-2 font-mono">max_advance_days</td>
+                                    <td class="px-3 py-2">u16 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">14</td>
+                                    <td class="px-3 py-2 font-mono">pricing_type</td>
+                                    <td class="px-3 py-2">string</td>
+                                    <td class="px-3 py-2">Must match the rate's declared type.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">15</td>
+                                    <td class="px-3 py-2 font-mono">adult_price</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Only for <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Standard</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">16</td>
+                                    <td class="px-3 py-2 font-mono">single_price</td>
+                                    <td class="px-3 py-2">u32 or empty</td>
+                                    <td class="px-3 py-2">Only for <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Standard</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">17</td>
+                                    <td class="px-3 py-2 font-mono">base_price</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Only for <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Rlo</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">18</td>
+                                    <td class="px-3 py-2 font-mono">obp_prices</td>
+                                    <td class="px-3 py-2">list of <code class="font-mono">adults^price</code></td>
+                                    <td class="px-3 py-2">Only for <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Obp</code>,
+                                        pipe-separated.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">19</td>
+                                    <td class="px-3 py-2 font-mono">los_prices</td>
+                                    <td class="px-3 py-2">list of <code class="font-mono">nights^adults^price</code>
+                                    </td>
+                                    <td class="px-3 py-2">Only for <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Los</code>,
+                                        pipe-separated.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">20</td>
+                                    <td class="px-3 py-2 font-mono">child_overrides</td>
+                                    <td class="px-3 py-2">list of <code
+                                            class="font-mono">bucket^index^amount^per_stay</code></td>
+                                    <td class="px-3 py-2">Per-day overrides for the rate's default child grid.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">Important</strong></p>
+                        <ul class="space-y-2 text-sm text-gray-700 list-disc pl-5">
+                            <li>The <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">pricing_type</code> on
+                                a calendar row must match the rate's declared <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">pricing_type</code>. Mismatch
+                                is rejected.</li>
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">obp_prices</code> and <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">los_prices</code> are keyed
+                                by adults, not total occupancy. Children are never counted in the OBP/LOS key; they are
+                                priced separately via the child grid.</li>
+                            <li>Empty OBP/LOS maps mean "no price for that combination".</li>
+                            <li>LOS prices are per night, capped by the rate's max LOS.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- charges.csv -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">charges.csv</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-gray-700 border border-gray-200 rounded-md">
+                            <thead class="bg-gray-50 text-gray-900">
+                                <tr>
+                                    <th class="text-left px-3 py-2 font-semibold">#</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Column</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Type</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="px-3 py-2">0</td>
+                                    <td class="px-3 py-2 font-mono">charge_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Must be unique within a property.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">1</td>
+                                    <td class="px-3 py-2 font-mono">property_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">2</td>
+                                    <td class="px-3 py-2 font-mono">charge_type</td>
+                                    <td class="px-3 py-2">string</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">CityTax</code>,
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Vat</code>,
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Tax</code>,
+                                        <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">CleaningFee</code>,
+                                        <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">ResortFee</code>,
+                                        <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">ServiceFee</code>,
+                                        <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">TransferFee</code>,
+                                        <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">DestinationCharge</code>,
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Other</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">3</td>
+                                    <td class="px-3 py-2 font-mono">guest_origin</td>
+                                    <td class="px-3 py-2">string</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Any</code>, <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Domestic</code>,
+                                        <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">International</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">4</td>
+                                    <td class="px-3 py-2 font-mono">travel_purpose</td>
+                                    <td class="px-3 py-2">string</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Any</code>, <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Leisure</code>,
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Business</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">5</td>
+                                    <td class="px-3 py-2 font-mono">level</td>
+                                    <td class="px-3 py-2">string</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Property</code> or
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Room</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">6</td>
+                                    <td class="px-3 py-2 font-mono">room_type_id</td>
+                                    <td class="px-3 py-2">u32 or empty</td>
+                                    <td class="px-3 py-2">Required if <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">level = Room</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">7</td>
+                                    <td class="px-3 py-2 font-mono">periods</td>
+                                    <td class="px-3 py-2">list of <code
+                                            class="font-mono">from^to^mode^amount^base^excluded</code></td>
+                                    <td class="px-3 py-2">Pipe-separated.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">8</td>
+                                    <td class="px-3 py-2 font-mono">child_multipliers</td>
+                                    <td class="px-3 py-2">list of <code class="font-mono">lte^multiplier</code> or empty
+                                    </td>
+                                    <td class="px-3 py-2">Pipe-separated. <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">multiplier</code>
+                                        is percent (100 = 1.0).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">Period modes</strong></p>
+                        <p class="text-sm text-gray-700">
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerNight</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerStay</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerPersonPerNight</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerPersonPerStay</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">Percentage</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">Incalculable</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerDay</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerPersonPerDay</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">Variable</code>.
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-700 list-disc pl-5">
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerDay</code> and <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerPersonPerDay</code> charge
+                                for <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">nights + 1</code> days
+                                (both stay endpoints inclusive).</li>
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">Variable</code> is not
+                                computed by the engine. Charges with this mode are skipped.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">Amount units by mode</strong></p>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">PerNight, PerStay, PerPersonPerNight,
+                                    PerPersonPerStay, PerDay, PerPersonPerDay</strong> — smallest currency unit.</li>
+                            <li><strong class="font-semibold text-gray-900">Percentage</strong> — whole percent (e.g.,
+                                <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">10</code> = 10%).
+                            </li>
+                            <li><strong class="font-semibold text-gray-900">Incalculable, Variable</strong> — ignored.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">Excluded</strong></p>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">false</strong> — Charge is included in the
+                                displayed price.</li>
+                            <li><strong class="font-semibold text-gray-900">true</strong> — Charge is paid at the
+                                property. Returned in a separate <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">excluded_taxes</code> field
+                                in search and matrix responses, and not added to <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">total</code>.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">Percentage base</strong> (only
+                            for <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">mode = Percentage</code>)
+                        </p>
+                        <p class="text-sm text-gray-700">
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">+</code>-separated combination
+                            of
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">NetRoomPrice</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PropertyCharges</code>,
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">LocalityCharges</code>.
+                            Must include <code
+                                class="font-mono text-xs bg-white px-1 py-0.5 rounded">NetRoomPrice</code>.
+                            A charge cannot base itself on its own category (e.g., a <code
+                                class="font-mono text-xs bg-white px-1 py-0.5 rounded">CleaningFee</code> cannot include
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PropertyCharges</code>).
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">child_multipliers</strong></p>
+                        <p class="text-sm text-gray-700">
+                            Applies to the entire charge. If the charge has multiple periods, they all receive the same
+                            bands.
+                            Applies only to <code
+                                class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerPersonPerStay</code> and
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PerPersonPerNight</code> modes;
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">TransferFee</code> is the sole
+                            exception among
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">PropertyCharges</code>-category
+                            types.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">Specificity</strong></p>
+                        <p class="text-sm text-gray-700">
+                            When a property has multiple charges of the same <code
+                                class="font-mono text-xs bg-white px-1 py-0.5 rounded">charge_type</code>,
+                            only the most specific match applies. Priority order:
+                        </p>
+                        <ol class="space-y-2 text-sm text-gray-700 list-decimal pl-5">
+                            <li><code class="font-mono text-xs bg-white px-1 py-0.5 rounded">guest_origin</code> and
+                                <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">travel_purpose</code> both
+                                specific (e.g., <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">International</code> + <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">Leisure</code>).
+                            </li>
+                            <li>One specific, one <code
+                                    class="font-mono text-xs bg-white px-1 py-0.5 rounded">Any</code>.</li>
+                            <li>Both <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">Any</code>.</li>
+                        </ol>
+                        <p class="text-sm text-gray-700">Room-level charges take priority over property-level charges of
+                            the same type.</p>
+                    </div>
+                </div>
+
+                <!-- promotions.csv -->
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">promotions.csv</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm text-gray-700 border border-gray-200 rounded-md">
+                            <thead class="bg-gray-50 text-gray-900">
+                                <tr>
+                                    <th class="text-left px-3 py-2 font-semibold">#</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Column</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Type</th>
+                                    <th class="text-left px-3 py-2 font-semibold">Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="px-3 py-2">0</td>
+                                    <td class="px-3 py-2 font-mono">promotion_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">Must be unique within a property.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">1</td>
+                                    <td class="px-3 py-2 font-mono">property_id</td>
+                                    <td class="px-3 py-2">u32</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">2</td>
+                                    <td class="px-3 py-2 font-mono">promotion_type</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">3</td>
+                                    <td class="px-3 py-2 font-mono">promotion_category</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">Up to 3 promotions applied per booking; best per category
+                                        wins.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">4</td>
+                                    <td class="px-3 py-2 font-mono">target_channel</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">0</code> = public,
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">1</code> =
+                                        subscribers, <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">2</code> = app,
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">3</code> = all
+                                        mobile, <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">255</code> =
+                                        country-targeted.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">5</td>
+                                    <td class="px-3 py-2 font-mono">target_country</td>
+                                    <td class="px-3 py-2">string</td>
+                                    <td class="px-3 py-2">ISO 3166-1 alpha-2, uppercase. Required when <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">target_channel = 255</code>.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">6</td>
+                                    <td class="px-3 py-2 font-mono">min_stay_through</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">7</td>
+                                    <td class="px-3 py-2 font-mono">non_refundable</td>
+                                    <td class="px-3 py-2">bool</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">8</td>
+                                    <td class="px-3 py-2 font-mono">book_date_start</td>
+                                    <td class="px-3 py-2">date or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">9</td>
+                                    <td class="px-3 py-2 font-mono">book_date_end</td>
+                                    <td class="px-3 py-2">date or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">10</td>
+                                    <td class="px-3 py-2 font-mono">book_time_start</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">Hour, 0–23.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">11</td>
+                                    <td class="px-3 py-2 font-mono">book_time_end</td>
+                                    <td class="px-3 py-2">u8 or empty</td>
+                                    <td class="px-3 py-2">Hour, 0–23.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">12</td>
+                                    <td class="px-3 py-2 font-mono">stay_date_start</td>
+                                    <td class="px-3 py-2">date</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">13</td>
+                                    <td class="px-3 py-2 font-mono">stay_date_end</td>
+                                    <td class="px-3 py-2">date</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">14</td>
+                                    <td class="px-3 py-2 font-mono">active_weekdays</td>
+                                    <td class="px-3 py-2">list of u8 or empty</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">1</code> = Monday
+                                        … <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">7</code> =
+                                        Sunday. Pipe-separated.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">15</td>
+                                    <td class="px-3 py-2 font-mono">excluded_dates</td>
+                                    <td class="px-3 py-2">list of dates or empty</td>
+                                    <td class="px-3 py-2">Pipe-separated.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">16</td>
+                                    <td class="px-3 py-2 font-mono">additional_dates</td>
+                                    <td class="px-3 py-2">list of dates or empty</td>
+                                    <td class="px-3 py-2">Dates added outside the main range.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">17</td>
+                                    <td class="px-3 py-2 font-mono">discount_value</td>
+                                    <td class="px-3 py-2">u8</td>
+                                    <td class="px-3 py-2">Percent (<code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">10</code> = 10%,
+                                        <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">100</code> =
+                                        100%).
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">18</td>
+                                    <td class="px-3 py-2 font-mono">room_type_ids</td>
+                                    <td class="px-3 py-2">list of u32 or empty</td>
+                                    <td class="px-3 py-2">Pipe-separated. Empty = all room types.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">19</td>
+                                    <td class="px-3 py-2 font-mono">parent_rate_ids</td>
+                                    <td class="px-3 py-2">list of u32 or empty</td>
+                                    <td class="px-3 py-2">Pipe-separated. Empty = all rates.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">20</td>
+                                    <td class="px-3 py-2 font-mono">early_booker_days</td>
+                                    <td class="px-3 py-2">u16 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">21</td>
+                                    <td class="px-3 py-2 font-mono">last_minute_unit</td>
+                                    <td class="px-3 py-2">string or empty</td>
+                                    <td class="px-3 py-2"><code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Hour</code>, <code
+                                            class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">Day</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-3 py-2">22</td>
+                                    <td class="px-3 py-2 font-mono">last_minute_value</td>
+                                    <td class="px-3 py-2">u16 or empty</td>
+                                    <td class="px-3 py-2">—</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-md p-4 space-y-2">
+                        <p class="text-sm text-gray-800"><strong class="font-semibold">Discount unit</strong></p>
+                        <p class="text-sm text-gray-700">
+                            <code class="font-mono text-xs bg-white px-1 py-0.5 rounded">discount_value</code> is
+                            percent.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Rules and Constraints</h3>
+                    <p class="text-sm text-gray-800 font-semibold">Required consistency</p>
+                    <ul class="space-y-3 text-sm text-gray-700 list-disc pl-5">
+                        <li>Every <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">property_id</code> in
+                            child files must exist in <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">properties.csv</code>.</li>
+                        <li>Every <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">room_type_id</code> in
+                            <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">room_rates.csv</code> and
+                            <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">availability.csv</code> must
+                            exist in <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">room_types.csv</code>.
+                        </li>
+                        <li>Every <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">rate_plan_id</code> in
+                            <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">calendar.csv</code> must
+                            exist in <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">room_rates.csv</code>.
+                        </li>
+                        <li>Every calendar row's <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">pricing_type</code> must match
+                            the rate's declared <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">pricing_type</code>.</li>
+                        <li>Every <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">(rate_plan_id, date)</code>
+                            pair in <code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">calendar.csv</code>
+                            must be unique.</li>
+                        <li>Every <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">(room_type_id, date)</code>
+                            pair in <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">availability.csv</code> must
+                            be unique.</li>
+                        <li><code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">room_type_id</code> in <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">charges.csv</code> (when <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">level = Room</code>) must
+                            exist in <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">room_types.csv</code>.</li>
+                        <li><code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">charge_id</code> must be
+                            unique within a property.</li>
+                        <li><code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">promotion_id</code> must be
+                            unique within a property.</li>
+                    </ul>
+                    <p class="text-sm text-gray-800 font-semibold mt-4">Limits</p>
+                    <ul class="space-y-3 text-sm text-gray-700 list-disc pl-5">
+                        <li>64 distinct property filter codes across the dataset.</li>
+                        <li>64 distinct room feature codes.</li>
+                        <li>32 distinct bed types.</li>
+                        <li>64 distinct rate value-add codes.</li>
+                        <li>Child age buckets: up to 4 per property.</li>
+                        <li>LOS pricing: max nights defined by rate.</li>
+                    </ul>
+                    <p class="text-sm text-gray-800 font-semibold mt-4">What is not checked</p>
+                    <ul class="space-y-3 text-sm text-gray-700 list-disc pl-5">
+                        <li>That your data is semantically correct (e.g., that prices are reasonable).</li>
+                        <li>That <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">stay_date_start &lt;= stay_date_end</code>
+                            in promotions.</li>
+                        <li>That room <code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">max_adults + max_children &gt;= max_occupancy</code>.
+                        </li>
+                    </ul>
+                    <p class="text-sm text-gray-700 mt-2">Veyoz trusts the CSV. Invalid data produces invalid search
+                        results.</p>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-lg p-5 space-y-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Error Messages</h3>
+                    <p class="text-sm text-gray-700">
+                        Snapshot build errors reference the file name and the failing row. Common causes:
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-700 list-disc pl-5">
+                        <li><code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">"invalid utf8"</code> — a
+                            CSV contains non-UTF-8 bytes.</li>
+                        <li><code class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">"bad u32: ..."</code> — a
+                            numeric field is not parseable.</li>
+                        <li><code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">"room_type references unknown property N"</code>
+                            — an orphan row.</li>
+                        <li><code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">"bad pricing_type: ..."</code>
+                            — misspelled pricing type.</li>
+                        <li><code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">"bad offset_type: ..."</code>
+                            — misspelled RLO offset type.</li>
+                        <li><code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">"weekday out of range: N"</code>
+                            — a weekday value outside 1–7.</li>
+                        <li><code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">"duplicate charge id: N"</code>
+                            — a charge id appears twice for the same property.</li>
+                        <li><code
+                                class="font-mono text-xs bg-gray-100 px-1 py-0.5 rounded">"duplicate promotion id: N"</code>
+                            — a promotion id appears twice for the same property.</li>
+                    </ul>
+                    <p class="text-sm text-gray-700">Fix the row, rebuild.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
