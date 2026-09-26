@@ -2972,6 +2972,48 @@
     </main>
 
     <script src="js/script.js"></script>
+    <script>
+        // menu
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const allSections = document.querySelectorAll('section');
+
+            // Hide all sections initially
+            allSections.forEach(section => section.style.display = 'none');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Get the target section ID from link href or data attribute
+                    const targetId = this.getAttribute('href').replace('#', '') ||
+                        this.getAttribute('data-target');
+
+                    if (this.classList.contains('no-section')) {   // ← add this guard
+                        e.preventDefault();                          // keep dropdown open
+                        return;                                      // do nothing else
+                    }
+
+                    if (targetId) {
+                        // Hide all sections
+                        allSections.forEach(section => section.style.display = 'none');
+
+                        // Show target section
+                        const targetSection = document.getElementById(targetId);
+                        if (targetSection) {
+                            targetSection.style.display = 'block';
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+
+            // Show first section by default
+            if (allSections.length > 0) {
+                allSections[0].style.display = 'block';
+            }
+        });
+    </script>
 </body>
 
 </html>

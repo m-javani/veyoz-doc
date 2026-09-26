@@ -491,9 +491,9 @@ pre code {
     min-height: 100vh;
 }
 
-.content-section {
+/* .content-section {
     display: none;
-}
+} */
 
 .content-section:first-child {
     display: block;
